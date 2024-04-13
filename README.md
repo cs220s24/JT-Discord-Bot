@@ -17,14 +17,14 @@ This Discord bot is designed to connect to Discord servers (guilds), welcome new
 
 1. **Clone the repository:**
 
-2. **Create Virtual Enviroment**
--python3 -m venv .venv
+2. Create Virtual Enviroment
+  `python3 -m venv .venv`
 
-3. **Activate Virtual Enviroment**
--source .venv/bin/activate
+3. Activate Virtual Enviroment
+  `source .venv/bin/activate`
 
-4. **Install the Requirements**
-pip3 install -r requirements.txt
+4. Install the Requirements in `requirements.txt`
+  `pip install -r requirements.txt`
 
 5. **Set up environment variables:**
 
@@ -41,7 +41,7 @@ Replace `your_discord_bot_token`, `your_guild_id`, and `your_welcome_channel_id`
 
 To run the bot, use the following command in the terminal:
 
-python3 bot.py
+  `python bot.py`
 
 
 
