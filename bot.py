@@ -75,7 +75,7 @@ async def on_member_join(member):
             if welcome_channel:
                 await welcome_channel.send(f'Welcome to the server, {member.mention}! 🎉')
             else:
-                print("Welcome channel with ID {welcome_channel_id} not found")
+                print(f"Welcome channel with ID {welcome_channel_id} not found")
         else:
             print("Invalid WELCOME_CHANNEL_ID. Please check your .env configuration.")
 
