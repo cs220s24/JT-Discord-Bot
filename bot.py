@@ -90,9 +90,11 @@ async def on_message(message):
             command_parts = message.content.split()
             if len(command_parts) >= 2:
                 twitter_handle = command_parts[1]
+                # Log the user who sent the command to the terminal
+                print(f"Command received from {message.author.name}#{message.author.discriminator}")
                 tweets = get_latest_tweets(twitter_handle)
                 response = "\n".join(tweets) if tweets else "No tweets found or unable to retrieve tweets."
                 await message.channel.send(response)
-
 client.run(TOKEN)
+
 
