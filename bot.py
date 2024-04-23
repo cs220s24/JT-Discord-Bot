@@ -1,8 +1,9 @@
 import os
 import certifi
 import discord
-import tweepy
 from dotenv import load_dotenv
+import random
+import json  # Import the json module
 
 # Ensure SSL certificates are correctly set for HTTPS requests
 os.environ['SSL_CERT_FILE'] = certifi.where()
@@ -11,18 +12,7 @@ os.environ['SSL_CERT_FILE'] = certifi.where()
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD_ID = os.getenv('DISCORD_GUILD')
-WELCOME_CHANNEL_ID = os.getenv('WELCOME_CHANNEL_ID')
-
-# Twitter API credentials
-twitter_api_key = os.getenv('TWITTER_API_KEY')
-twitter_api_secret = os.getenv('TWITTER_API_SECRET')
-twitter_access_token = os.getenv('TWITTER_ACCESS_TOKEN')
-twitter_access_token_secret = os.getenv('TWITTER_ACCESS_TOKEN_SECRET')
-
-# Authenticate with the Twitter API
-auth = tweepy.OAuthHandler(twitter_api_key, twitter_api_secret)
-auth.set_access_token(twitter_access_token, twitter_access_token_secret)
-twitter_api = tweepy.API(auth)
+TRIVIA_CHANNEL_ID = os.getenv('TRIVIA_CHANNEL_ID')
 
 # Set the intents
 intents = discord.Intents.default()
@@ -33,24 +23,12 @@ intents.message_content = True
 # Initialize the client with the defined intents
 client = discord.Client(intents=intents)
 
-# Function to fetch tweets
-def get_latest_tweets(user_handle, tweet_count=5):
-    try:
-        tweets = twitter_api.user_timeline(screen_name=user_handle, count=tweet_count, tweet_mode='extended')
-        if not tweets:
-            print("No tweets returned by the API.")
-        return [tweet.full_text for tweet in tweets]
-    except tweepy.Forbidden as e:
-        print(f"Access to Twitter API forbidden: {e}")
-        return []
-    except tweepy.HTTPException as e:
-        print(f"HTTP error from Twitter API: {e}")
-        return []
-    except Exception as e:
-        print(f"General error: {e}")
-        return []
+# Load trivia questions from JSON file
+with open('trivia_questions.json', 'r') as file:
+    trivia_questions = json.load(file)
 
-
+# Active trivia session tracker
+active_sessions = {}
 
 @client.event
 async def on_ready():
@@ -61,40 +39,34 @@ async def on_ready():
         if guild:
             print(f'{client.user} is connected to the following guild:\n'
                   f'{guild.name}(id: {guild.id})')
-        else:
-            print("Guild with ID {guild_id} not found")
-    else:
-        print("Invalid GUILD_ID. Please check your .env configuration.")
-
-@client.event
-async def on_member_join(member):
-    if member.guild.id == int(GUILD_ID):
-        welcome_channel_id = int(WELCOME_CHANNEL_ID) if WELCOME_CHANNEL_ID and WELCOME_CHANNEL_ID.isdigit() else None
-        if welcome_channel_id:
-            welcome_channel = client.get_channel(welcome_channel_id)
-            if welcome_channel:
-                await welcome_channel.send(f'Welcome to the server, {member.mention}! 🎉')
-            else:
-                print(f"Welcome channel with ID {welcome_channel_id} not found")
-        else:
-            print("Invalid WELCOME_CHANNEL_ID. Please check your .env configuration.")
 
 @client.event
 async def on_message(message):
     if message.author == client.user:
         return
 
-    # Check if the command is from the "x-tweets" channel
-    if message.channel.name == "x-tweets":
-        if message.content.startswith('!tweets'):
-            command_parts = message.content.split()
-            if len(command_parts) >= 2:
-                twitter_handle = command_parts[1]
-                # Log the user who sent the command to the terminal
-                print(f"Command received from {message.author.name}#{message.author.discriminator}")
-                tweets = get_latest_tweets(twitter_handle)
-                response = "\n".join(tweets) if tweets else "No tweets found or unable to retrieve tweets."
-                await message.channel.send(response)
-client.run(TOKEN)
+    if message.channel.id == int(TRIVIA_CHANNEL_ID):
+        if message.content.startswith('!starttrivia'):
+            question = random.choice(trivia_questions)
+            options_text = "\n".join(f"{idx+1}. {option}" for idx, option in enumerate(question["options"]))
+            await message.channel.send(f"{question['question']}\n{options_text}")
+            active_sessions[message.author.id] = {
+                'answer': question['answer'],
+                'options': question['options']
+            }
+            return
 
+        if message.author.id in active_sessions:
+            user_response = message.content.strip().lower()
+            correct_answer = active_sessions[message.author.id]['answer'].lower()
+            options = active_sessions[message.author.id]['options']
+
+            if user_response == correct_answer or \
+               (user_response.isdigit() and int(user_response) <= len(options) and options[int(user_response) - 1].lower() == correct_answer):
+                await message.channel.send("Correct answer! 🎉")
+                del active_sessions[message.author.id]
+            else:
+                await message.channel.send("Sorry, that's not correct. Try again!")
+
+client.run(TOKEN)
 
