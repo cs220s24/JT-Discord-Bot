@@ -1,0 +1,127 @@
+[
+    {
+        "question": "Which nation hosted the FIFA World Cup in 2006?",
+        "answer": "Germany",
+        "options": ["Germany", "United Kingdom", "Brazil", "South Africa"]
+    },
+    {
+        "question": "Which of the following pitchers was named National League Rookie of the Year for the 2013 season?",
+        "answer": "Jose Fernandez",
+        "options": ["Jose Fernandez", "Jacob deGrom", "Shelby Miller", "Matt Harvey"]
+    },
+    {
+        "question": "Which of these countries' national teams qualified for the 2018 FIFA World Cup in Russia?",
+        "answer": "Tunisia",
+        "options": ["Tunisia", "United States of America", "Italy", "Netherlands"]
+    },
+    {
+        "question": "Which of the following players was named the 2017-2018 NBA MVP?",
+        "answer": "James Harden",
+        "options": ["James Harden", "LeBron James", "Kevin Durant", "Stephen Curry"]
+    },
+    {
+        "question": "Which of the following players was named the 2017-2018 NHL MVP?",
+        "answer": "Taylor Hall",
+        "options": ["Taylor Hall", "Nikita Kucherov", "Connor McDavid", "Anze Kopitar"]
+    },
+    {
+        "question": "Which of the following players was named the 2017-2018 NFL MVP?",
+        "answer": "Tom Brady",
+        "options": ["Tom Brady", "Todd Gurley", "Carson Wentz", "Antonio Brown"]
+    },
+    {
+        "question": "Which of the following players was named the 2017-2018 MLB MVP?",
+        "answer": "Jose Altuve",
+        "options": ["Jose Altuve", "Aaron Judge", "Giancarlo Stanton", "Mike Trout"]
+    },
+    {
+        "question": "Which of the following players was named the 2017-2018 MLS MVP?",
+        "answer": "Josef Martinez",
+        "options": ["Josef Martinez", "Miguel Almiron", "Sebastian Giovinco", "David Villa"]
+    },
+    {
+        "question": "Which of the following players was named the 2017-2018 WNBA MVP?",
+        "answer": "Breanna Stewart",
+        "options": ["Breanna Stewart", "Candace Parker", "Maya Moore", "Diana Taurasi"]
+    },
+    {
+        "question": "Which of the following players was named the 2017-2018 NWSL MVP?",
+        "answer": "Sam Kerr",
+        "options": ["Sam Kerr", "Marta", "Christen Press", "Lindsey Horan"]
+    },
+    {
+        "question": "Who holds the record for the most points in a single NBA game?",
+        "answer": "Wilt Chamberlain",
+        "options": ["Wilt Chamberlain", "Kobe Bryant", "Michael Jordan", "LeBron James"]
+        },
+        {
+        "question": "Which team won the NBA Championship in 1996?",
+        "answer": "Chicago Bulls",
+        "options": ["Chicago Bulls", "Utah Jazz", "Houston Rockets", "Seattle SuperSonics"]
+        },
+        {
+        "question": "Who won the NBA Rookie of the Year Award in 2003?",
+        "answer": "LeBron James",
+        "options": ["LeBron James", "Carmelo Anthony", "Chris Bosh", "Dwyane Wade"]
+        },
+        {
+        "question": "Which NBA player is known as 'The Big Fundamental'?",
+        "answer": "Tim Duncan",
+        "options": ["Tim Duncan", "Shaquille O'Neal", "Kevin Garnett", "Dirk Nowitzki"]
+        },
+        {
+        "question": "What year was the three-point line introduced in the NBA?",
+        "answer": "1979",
+        "options": ["1979", "1963", "1984", "1990"]
+        },
+        {
+        "question": "Which player has won the most NBA MVP awards?",
+        "answer": "Kareem Abdul-Jabbar",
+        "options": ["Kareem Abdul-Jabbar", "Michael Jordan", "LeBron James", "Bill Russell"]
+        },
+        {
+        "question": "Who was the first player to score a quadruple-double in an NBA game?",
+        "answer": "Nate Thurmond",
+        "options": ["Nate Thurmond", "David Robinson", "Hakeem Olajuwon", "Alvin Robertson"]
+        },
+        {
+        "question": "Which team drafted Kobe Bryant?",
+        "answer": "Charlotte Hornets",
+        "options": ["Charlotte Hornets", "Los Angeles Lakers", "Boston Celtics", "Philadelphia 76ers"]
+        },
+        {
+        "question": "What is the record number of NBA Championships won by a franchise?",
+        "answer": "17",
+        "options": ["17", "16", "11", "13"]
+        },
+        {
+        "question": "Which player was nicknamed 'The Answer'?",
+        "answer": "Allen Iverson",
+        "options": ["Allen Iverson", "Shaquille O'Neal", "Kobe Bryant", "Tracy McGrady"]
+        },
+        {
+        "question": "What year did the NBA lockout shorten the season to 50 games?",
+        "answer": "1999",
+        "options": ["1999", "2001", "1996", "1989"]
+        },
+        {
+        "question": "Who is the all-time leading scorer in Los Angeles Lakers history?",
+        "answer": "Kobe Bryant",
+        "options": ["Kobe Bryant", "Magic Johnson", "Kareem Abdul-Jabbar", "Jerry West"]
+        },
+        {
+        "question": "Which player has the most career assists in NBA history?",
+        "answer": "John Stockton",
+        "options": ["John Stockton", "Jason Kidd", "Steve Nash", "Magic Johnson"]
+        },
+        {
+        "question": "Which NBA player was known as 'The Glove'?",
+        "answer": "Gary Payton",
+        "options": ["Gary Payton", "Michael Jordan", "Scottie Pippen", "Kobe Bryant"]
+        },
+        {
+        "question": "What year was the first NBA All-Star Game played?",
+        "answer": "1951",
+        "options": ["1951", "1947", "1960", "1955"]
+        }
+]
