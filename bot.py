@@ -1,9 +1,10 @@
 import os
 import certifi
 import discord
+from discord.ext import commands
 from dotenv import load_dotenv
 import random
-import json  # Import the json module
+import json
 
 # Ensure SSL certificates are correctly set for HTTPS requests
 os.environ['SSL_CERT_FILE'] = certifi.where()
@@ -17,56 +18,62 @@ TRIVIA_CHANNEL_ID = os.getenv('TRIVIA_CHANNEL_ID')
 # Set the intents
 intents = discord.Intents.default()
 intents.members = True
-intents.messages = True
 intents.message_content = True
 
 # Initialize the client with the defined intents
-client = discord.Client(intents=intents)
+bot = commands.Bot(command_prefix="!", intents=intents)
 
-# Load trivia questions from JSON file
+# Load trivia questions
 with open('trivia_questions.json', 'r') as file:
     trivia_questions = json.load(file)
 
-# Active trivia session tracker
+# Active trivia sessions with questions and scores
 active_sessions = {}
 
-@client.event
+@bot.event
 async def on_ready():
-    print(f'{client.user} has connected to Discord!')
-    guild_id = int(GUILD_ID) if GUILD_ID and GUILD_ID.isdigit() else None
-    if guild_id:
-        guild = discord.utils.get(client.guilds, id=guild_id)
-        if guild:
-            print(f'{client.user} is connected to the following guild:\n'
-                  f'{guild.name}(id: {guild.id})')
+    print(f'{bot.user.name} has connected to Discord!')
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
+def select_questions():
+    return random.sample(trivia_questions, 5)
 
-    if message.channel.id == int(TRIVIA_CHANNEL_ID):
-        if message.content.startswith('!starttrivia'):
-            question = random.choice(trivia_questions)
-            options_text = "\n".join(f"{idx+1}. {option}" for idx, option in enumerate(question["options"]))
-            await message.channel.send(f"{question['question']}\n{options_text}")
-            active_sessions[message.author.id] = {
-                'answer': question['answer'],
-                'options': question['options']
-            }
-            return
+@bot.command(name="starttrivia")
+async def start_trivia(ctx):
+    if ctx.channel.id == int(TRIVIA_CHANNEL_ID):
+        questions = select_questions()
+        active_sessions[ctx.author.id] = {
+            'questions': questions,
+            'current_question': 0,
+            'score': 0
+        }
+        question = questions[0]['question']
+        options_text = "\n".join(f"{idx + 1}. {option}" for idx, option in enumerate(questions[0]["options"]))
+        await ctx.send(f"Question 1: {question}\n{options_text}")
 
-        if message.author.id in active_sessions:
-            user_response = message.content.strip().lower()
-            correct_answer = active_sessions[message.author.id]['answer'].lower()
-            options = active_sessions[message.author.id]['options']
+@bot.command(name="answer")
+async def answer(ctx, *, user_response: str):
+    session = active_sessions.get(ctx.author.id)
+    if session:
+        current_question = session['questions'][session['current_question']]
+        correct_answer = current_question['answer'].lower()
+        options = current_question['options']
 
-            if user_response == correct_answer or \
-               (user_response.isdigit() and int(user_response) <= len(options) and options[int(user_response) - 1].lower() == correct_answer):
-                await message.channel.send("Correct answer! 🎉")
-                del active_sessions[message.author.id]
-            else:
-                await message.channel.send("Sorry, that's not correct. Try again!")
+        if user_response.lower() == correct_answer or \
+           (user_response.isdigit() and int(user_response) <= len(options) and options[int(user_response) - 1].lower() == correct_answer):
+            session['score'] += 1
+            result_text = "Correct answer! 🎉\n"
+        else:
+            result_text = "Sorry, that's not correct.\n"
 
-client.run(TOKEN)
+        session['current_question'] += 1
+        if session['current_question'] < 5:
+            next_question = session['questions'][session['current_question']]
+            question_text = next_question['question']
+            options_text = "\n".join(f"{idx + 1}. {option}" for idx, option in enumerate(next_question["options"]))
+            await ctx.send(f"{result_text}Next question: {question_text}\n{options_text}")
+        else:
+            score = session['score']
+            await ctx.send(f"{result_text}You've completed the trivia! Your score: {score}/5")
+            del active_sessions[ctx.author.id]
 
+bot.run(TOKEN)
