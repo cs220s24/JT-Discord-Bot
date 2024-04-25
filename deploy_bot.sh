@@ -16,6 +16,20 @@ fi
 sudo yum update -y
 sudo yum install -y git python3 python3-pip
 
+# Install Docker
+sudo amazon-linux-extras install docker
+
+# Start Docker and enable it to run at startup
+sudo service docker start
+sudo systemctl enable docker
+
+# Add the current user to the Docker group
+sudo usermod -a -G docker $(whoami)
+
+# Optionally, install Docker Compose
+sudo curl -L "https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
 # Clone the repository if not already cloned or pull latest changes
 if [ ! -d "/home/ec2-user/JT-Discord-Bot" ]; then
     git clone https://github.com/cs220s24/JT-Discord-Bot.git /home/ec2-user/JT-Discord-Bot
@@ -34,4 +48,3 @@ sudo systemctl enable discordbot
 sudo systemctl start discordbot
 
 echo "Deployment complete. The Discord bot service is up and running!"
-
