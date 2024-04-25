@@ -14,7 +14,7 @@ COPY requirements.txt .
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Copy the rest of your application's code
-COPY bot.py .
+COPY app/ .
 
 # Expose port 80 (if your application has a web interface or API)
 EXPOSE 80
