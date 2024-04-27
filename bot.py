@@ -16,7 +16,6 @@ GUILD_ID = os.getenv('DISCORD_GUILD')
 TRIVIA_CHANNEL_ID = os.getenv('TRIVIA_CHANNEL_ID')
 host = os.getenv('REDIS_HOST')
 port = os.getenv('REDIS_PORT')
-#WELCOME_CHANNEL_ID = os.getenv('WELCOME_CHANNEL_ID')
 
 if port is None:
     port = 6379
