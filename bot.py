@@ -5,7 +5,7 @@ from discord.ext import commands
 from dotenv import load_dotenv
 import random
 import json
-
+import redis
 # Ensure SSL certificates are correctly set for HTTPS requests
 os.environ['SSL_CERT_FILE'] = certifi.where()
 
@@ -14,7 +14,15 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD_ID = os.getenv('DISCORD_GUILD')
 TRIVIA_CHANNEL_ID = os.getenv('TRIVIA_CHANNEL_ID')
+host = os.getenv('REDIS_HOST')
+port = os.getenv('REDIS_PORT')
 #WELCOME_CHANNEL_ID = os.getenv('WELCOME_CHANNEL_ID')
+
+if port is None:
+    port = 6379
+
+if host is None:
+    host = 'localhost'
 
 # Set the intents
 intents = discord.Intents.default()

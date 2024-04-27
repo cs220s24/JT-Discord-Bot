@@ -19,6 +19,12 @@ sudo yum install -y git python3 python3-pip
 # Install Docker
 sudo amazon-linux-extras install docker
 
+#Install Redis
+sudo yum install -y redis6
+
+#Install Docker Compose
+sudo yum install -y docker-compose
+
 # Start Docker and enable it to run at startup
 sudo service docker start
 sudo systemctl enable docker
