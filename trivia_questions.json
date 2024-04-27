@@ -124,4 +124,30 @@
         "answer": "1951",
         "options": ["1951", "1947", "1960", "1955"]
         }
+        ,{
+        "question": "Which team won the 2018 FIFA World Cup?",
+        "answer": "France",
+        "options": ["France", "Croatia", "Belgium", "England"]
+        }
+        ,{
+        "question": "Which player won the Golden Boot at the 2018 FIFA World Cup?",
+        "answer": "Harry Kane",
+        "options": ["Harry Kane", "Antoine Griezmann", "Kylian Mbappe", "Luka Modric"]
+        }
+        ,{
+        "question": "Which player won the Golden Ball at the 2018 FIFA World Cup?",
+        "answer": "Luka Modric",
+        "options": ["Luka Modric", "Kylian Mbappe", "Antoine Griezmann", "Eden Hazard"]
+        }
+        ,{
+        "question": "Which player won the Golden Glove at the 2018 FIFA World Cup?",
+        "answer": "Thibaut Courtois",
+        "options": ["Thibaut Courtois", "Hugo Lloris", "Jordan Pickford", "Danijel Subasic"]
+        }
+        ,{
+        "question": "Which player won the Best Young Player Award at the 2018 FIFA World Cup?",
+        "answer": "Kylian Mbappe",
+        "options": ["Kylian Mbappe", "Antoine Griezmann", "Luka Modric", "Eden Hazard"]
+        }
+    
 ]
