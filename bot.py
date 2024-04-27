@@ -14,7 +14,6 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD_ID = os.getenv('DISCORD_GUILD')
 TRIVIA_CHANNEL_ID = os.getenv('TRIVIA_CHANNEL_ID')
-#WELCOME_CHANNEL_ID = os.getenv('WELCOME_CHANNEL_ID')
 
 # Set the intents
 intents = discord.Intents.default()
