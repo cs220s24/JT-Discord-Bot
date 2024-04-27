@@ -2,16 +2,20 @@
 Tutorial link: https://realpython.com/how-to-make-a-discord-bot-python/
 
 
-# Discord Bot Project
+# Discord Sports Bot 
 
-This Discord bot is designed to connect to Discord servers (guilds), welcome new members, and deliver basketbalkl news. The bot uses the Python library `py-cord` to interact with the Discord API, and it also ensures secure HTTPS requests with SSL certificates via `certifi`.
+This Discord bot is designed to enhance server engagement by hosting trivia games and delivering sports news. The bot connects to a Discord server, engages members through trivia games, and tracks their scores. Additionally, the bot utilizes webhooks to fetch and relay sports news updates directly from Twitter, keeping your community informed of the latest sports events.
+
+# Commands 
+`!starttrivia`: Initiates a trivia game in the designated trivia channel. The bot randomly selects five questions from the loaded trivia question pool and presents them one at a time to the participants.
+
+`!answer <response>`: Allows participants to submit their answers. The bot evaluates the response, updates the score accordingly, and proceeds to the next question.
 
 ## Setup Instructions
 
 ### Prerequisites
+- Amazon Web Services (AWS)
 
-- Install python 
-- pip (Python package installer)
 
 ### Installation
 
@@ -45,7 +49,7 @@ Replace `your_discord_bot_token`, `your_guild_id`, and `your_welcome_channel_id`
 
 To run the bot, use the following command in the terminal:
 
-  `python bot.py`
+  `python bot.py`  Ensure that your .env file, trivia_questions.json, and webhook settings are correctly set up in your project directory.
 
 
 
