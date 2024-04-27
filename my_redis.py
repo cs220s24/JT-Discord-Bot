@@ -17,3 +17,4 @@ for idx, question in enumerate(questions, start=1):
         redis_client.hset(question_key, f'option:{option_idx}', option)
 
 print("Questions stored in Redis successfully.")
+

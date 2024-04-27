@@ -54,3 +54,4 @@ sudo systemctl enable discordbot
 sudo systemctl start discordbot
 
 echo "Deployment complete. The Discord bot service is up and running!"
+
