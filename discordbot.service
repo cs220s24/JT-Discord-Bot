@@ -1,0 +1,16 @@
+[Unit]
+Description=Discord Bot Service
+Requires=docker.service
+After=network.target docker.service
+
+[Service]
+Type=simple
+# Ensure Docker and Docker Compose are used to start your bot
+WorkingDirectory=/home/ec2-user/JT-Discord-Bot  
+ExecStart=/usr/local/bin/docker-compose up
+ExecStop=/usr/local/bin/docker-compose down
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

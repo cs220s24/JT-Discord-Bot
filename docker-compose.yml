@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  discord-bot:
+    image: my-discord-bot:latest
+    env_file:
+      - .env
+    ports:
+      - "80:80"  # Adjust if your bot uses a web server
+    restart: always
