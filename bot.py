@@ -38,6 +38,8 @@ async def on_ready():
 def select_questions():
     return random.sample(trivia_questions, 5)
 
+
+
 @bot.command(name="starttrivia")
 async def start_trivia(ctx):
     if ctx.channel.id == int(TRIVIA_CHANNEL_ID):
